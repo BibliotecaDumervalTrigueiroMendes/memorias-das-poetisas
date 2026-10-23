@@ -173,7 +173,17 @@ var Loja = (function () {
         ? dados.covers
             .filter(function (c) { return c && c.url; })
             .map(function (c) {
-              return { url: fotoDireta(c.url), title: String(c.title || '').trim() };
+              return {
+                url: fotoDireta(c.url),
+                title: String(c.title || '').trim(),
+                author: String(c.author || '').trim(),
+                edition: String(c.edition || '').trim(),
+                publisher: String(c.publisher || '').trim(),
+                place: String(c.place || '').trim(),
+                year: String(c.year || '').trim(),
+                theme: String(c.theme || '').trim(),
+                notes: String(c.notes || '').trim()
+              };
             })
         : []
     };
@@ -205,6 +215,32 @@ var Loja = (function () {
       if (lista[i].id === id) return lista[i];
     }
     return null;
+  }
+
+  /* ---------------- obras (catálogo) ---------------- */
+
+  function getObras() {
+    var obras = [];
+    getPoetisas().forEach(function (p) {
+      var capas = Array.isArray(p.covers) ? p.covers : [];
+      capas.forEach(function (c) {
+        if (!c || !c.url) return;
+        obras.push({
+          url: c.url,
+          title: String(c.title || '').trim(),
+          author: String(c.author || p.name || '').trim(),
+          edition: String(c.edition || '').trim(),
+          publisher: String(c.publisher || '').trim(),
+          place: String(c.place || '').trim(),
+          year: String(c.year || '').trim(),
+          theme: String(c.theme || '').trim(),
+          notes: String(c.notes || '').trim(),
+          poetisaId: p.id,
+          poetisaName: p.name
+        });
+      });
+    });
+    return obras;
   }
 
   /* ---------------- comentários ---------------- */
@@ -281,6 +317,7 @@ var Loja = (function () {
     excluirPoetisa: excluirPoetisa,
     resetarPoetisas: resetarPoetisas,
     getPoetisa: getPoetisa,
+    getObras: getObras,
     getComentarios: getComentarios,
     adicionarComentario: adicionarComentario,
     moderarComentario: moderarComentario,

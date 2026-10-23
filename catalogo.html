@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de cordéis do acervo Memórias das Poetisas — autor, título, edição, editora, local, ano, tema e notas das obras.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#181410">
+  <title>Catálogo — Memórias das Poetisas da Literatura de Cordel</title>
+  <link rel="icon" href="elementos/estrela.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <!-- ================= CABEÇALHO ================= -->
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span class="brand__text">
+          <span class="brand__title">Memórias das Poetisas</span>
+          <span class="brand__descriptor">da Literatura de Cordel</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" data-site-nav aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="biografias.html">Biografias</a>
+        <a href="catalogo.html" aria-current="page">Catálogo</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ================= HERO DA PÁGINA ================= -->
+    <section class="page-hero">
+      <div class="shell page-hero__inner">
+        <div>
+          <span class="eyebrow">Acervo de obras</span>
+          <h1>Catálogo</h1>
+        </div>
+        <p>
+          Folhetos de cordel reunidos a partir das capas cadastradas no acervo.
+          Autor, título e edição aparecem em destaque; os demais dados completam
+          a ficha de cada obra.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= CATÁLOGO DE CORDÉIS ================= -->
+    <section class="section">
+      <div class="shell">
+
+        <p class="catalog-status" data-obras-status aria-live="polite">Carregando catálogo…</p>
+
+        <div class="obra-grid" data-obra-grid></div>
+
+        <div class="state-panel" data-obras-empty hidden>
+          <h3>Nenhuma obra catalogada ainda</h3>
+          <p>As capas e os dados bibliográficos cadastrados no painel aparecerão aqui.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand__title">Memórias das Poetisas</span>
+          <span class="brand__descriptor">da Literatura de Cordel</span>
+          <p>Acervo digital de referência sobre a produção poética feminina
+             na literatura de cordel brasileira.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navegação do rodapé">
+          <a href="index.html">Início</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="biografias.html">Biografias</a>
+          <a href="catalogo.html">Catálogo</a>
+          <a href="contato.html">Contato</a>
+          <a href="admin.html">Painel adm</a>
+        </nav>
+      </div>
+
+      <div class="credits">
+        <div class="credits__label">Créditos</div>
+        <div class="credits__list">
+          <a class="credit" href="https://portsamuellmsa.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <strong>Samuel Lucas</strong>
+            <small>Desenvolvimento</small>
+          </a>
+          <a class="credit" href="https://miguel-fernandes-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <strong>Miguel Fernandes</strong>
+            <small>Desenvolvimento</small>
+          </a>
+          <span class="credit credit--highlight">
+            <strong>Jackson</strong>
+            <small>Design, ilustração e tipografia</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-current-year>2026</span> Memórias das Poetisas da Literatura de Cordel. Todos os direitos reservados.</span>
+        <span>Projeto acadêmico da UFPB · PPGCi</span>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <p style="padding:1rem;background:#e0a02b;border-top:3px solid #181410;font-weight:700;text-align:center;">
+      Este catálogo precisa de JavaScript ativado para exibir as obras.
+    </p>
+  </noscript>
+
+  <script src="data.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="catalogo.js" defer></script>
+</body>
+</html>

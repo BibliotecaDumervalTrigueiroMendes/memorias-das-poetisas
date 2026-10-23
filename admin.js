@@ -350,12 +350,14 @@
     inputUrl.type = 'url';
     inputUrl.placeholder = 'Link da capa (aceita Google Drive)';
     inputUrl.value = dados.url || '';
+    inputUrl.setAttribute('data-cover-field', 'url');
     inputUrl.setAttribute('aria-label', 'Link da capa');
 
     var inputTitulo = document.createElement('input');
     inputTitulo.type = 'text';
     inputTitulo.placeholder = 'Título / legenda do folheto';
     inputTitulo.value = dados.title || '';
+    inputTitulo.setAttribute('data-cover-field', 'title');
     inputTitulo.setAttribute('aria-label', 'Título da capa');
 
     inputUrl.addEventListener('input', function () {
@@ -374,6 +376,42 @@
 
     campos.appendChild(inputUrl);
     campos.appendChild(inputTitulo);
+
+    var detalhes = document.createElement('details');
+    detalhes.className = 'cover-meta';
+    var resumo = document.createElement('summary');
+    resumo.textContent = 'Dados bibliográficos';
+    detalhes.appendChild(resumo);
+
+    var metaGrid = el('div', 'cover-meta__grid');
+    function criarCampo(campo, rotulo, placeholder) {
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = placeholder;
+      input.value = dados[campo] || '';
+      input.setAttribute('data-cover-field', campo);
+      input.setAttribute('aria-label', rotulo);
+      metaGrid.appendChild(input);
+      return input;
+    }
+
+    criarCampo('author', 'Autor', 'Autor (padrão: nome da poetisa)');
+    criarCampo('edition', 'Edição', 'Edição');
+    criarCampo('publisher', 'Editora', 'Editora');
+    criarCampo('place', 'Local', 'Local de publicação');
+    criarCampo('year', 'Ano', 'Ano');
+    criarCampo('theme', 'Tema', 'Tema');
+
+    var inputNotas = document.createElement('textarea');
+    inputNotas.rows = 2;
+    inputNotas.placeholder = 'Notas';
+    inputNotas.value = dados.notes || '';
+    inputNotas.setAttribute('data-cover-field', 'notes');
+    inputNotas.setAttribute('aria-label', 'Notas');
+    metaGrid.appendChild(inputNotas);
+
+    detalhes.appendChild(metaGrid);
+    campos.appendChild(detalhes);
     row.appendChild(campos);
 
     var btnRemove = document.createElement('button');
@@ -389,8 +427,21 @@
 
   function coletarCapas() {
     return $$('[data-covers-editor] .cover-row').map(function (row) {
-      var inputs = $$('input', row);
-      return { url: inputs[0].value.trim(), title: inputs[1].value.trim() };
+      function campo(nome) {
+        var node = row.querySelector('[data-cover-field="' + nome + '"]');
+        return node ? node.value.trim() : '';
+      }
+      return {
+        url: campo('url'),
+        title: campo('title'),
+        author: campo('author'),
+        edition: campo('edition'),
+        publisher: campo('publisher'),
+        place: campo('place'),
+        year: campo('year'),
+        theme: campo('theme'),
+        notes: campo('notes')
+      };
     }).filter(function (c) { return c.url; });
   }
 
